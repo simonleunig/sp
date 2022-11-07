@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+button.custom {
+  text-decoration: none;
+  outline: none;
+  background-color: #F59C01;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 10px 0 0 0;
+  cursor: pointer;
+  transition: all ease-in-out 0.25s;
+  user-select: none;
+  text-transform: uppercase;
+  color: #333;
+}
+button.custom:hover {
+  background-color: #bf7a02;
+  color: #eee;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.overlay .form {
+  background: lightgrey;
+  padding: 20px;
+  border-radius: 5px;
+  min-width: 350px;
+}
+.overlay .form h2 {
+  margin-top: 0;
+}
+.overlay .form .action-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+input,
+textarea {
+  display: block;
+  outline: none;
+  text-decoration: none;
+  border: none;
+  padding: 10px;
+  width: calc(100% - 20px);
+  margin: 10px 0;
+}
+td,
+th {
+  padding: 10px;
+  max-width: 180px;
+  width: 180px;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+td .content {
+  max-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+button.custom.small {
+  padding: 5px 10px;
+  font-size: 10px;
+}
