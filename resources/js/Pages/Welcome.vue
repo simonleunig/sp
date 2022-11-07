@@ -5,15 +5,14 @@
       <div class="header">
         <h1>Die Mürwiker</h1>
         <p>{{ time }}</p>
-      </div>
-      
-
+      </div>    
+      <div> <ContactsFeed/> </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-
+import ContactsFeed from "@/Components/ContactsFeed.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import axios from "axios";
 
@@ -21,6 +20,7 @@ export default {
   name: "Muerwiker",
   components: {
     Head,
+    ContactsFeed,
   },
   data() {
     return {
