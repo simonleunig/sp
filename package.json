@@ -1,4 +1,5 @@
 {
+    "name": "muerwiker-callcenter",
     "private": true,
     "scripts": {
         "dev": "vite",

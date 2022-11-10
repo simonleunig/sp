@@ -1,8 +1,12 @@
-## Information
+# Muerwiker-Callcenter
 
-Dies ist ein Projekt der Veranstaltung Software-Projekt an der Hochschule Flensburg.
+> Dies ist ein Projekt der Veranstaltung Software-Projekt an der Hochschule Flensburg.
 
-Ersteller: Simon Leunig, 
+# Autoren
+
+- Simon Leunig
+- Dejvi Ndreka
+- ...
 
 ## Vorhandene Funktionen
 
