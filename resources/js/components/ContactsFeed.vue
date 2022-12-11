@@ -1,62 +1,89 @@
 <template>
-  <div>
-    <div>
-      <h1>Items</h1>
+  <div class="container">
+    <h1 class="one">Zuordnung</h1>
+    <div class="assignment grid-style">
+      <button
+        v-for="(contact, index) in uniqueContacts"
+        :key="index"
+        @click="filterByAssignment(contact.assignment)"
+      >
+        {{ contact.assignment }}
+      </button>
     </div>
-    <div v-for="contact in contacts" :key="contact.id">
-      <div>
-        <button
-          class="custom"
-          @click="crbt(contact.id)"
-          style="width: 300px; margin: 0"
-        >
-          {{ contact.assignment }}
-        </button>
+    <h1 class="two">Ort</h1>
+    <div class="city grid-style">
+      <button
+        v-for="(contact, index) in filteredContacts"
+        :key="index"
+        @click="filterByCity(contact.city)"
+      >
+        {{ contact.city }}
+      </button>
+    </div>
+    <h1 class="three">Straße</h1>
+    <div class="street grid-style">
+      <button
+        v-for="(contact, index) in filteredCity"
+        :key="index"
+        @click="filterByStreet(contact.street)"
+        @mouseover="upHere = true"
+        @mouseleave="upHere = false"
+      >
+        {{ contact.street }}
+        <img :src="contact.image" alt="" v-show="upHere" />
+      </button>
+    </div>
+    <h1 class="four">Kontakt</h1>
+    <div class="contact grid-style">
+      <div
+        style="margin: 10px"
+        v-for="(contact, index) in filteredStreet"
+        :key="index"
+      >
+        {{ contact.personone }}
+        <br />
+        <a :href="`mailto:${contact.emailone}`"> {{ contact.emailone }}</a>
+        <br />
+        <a :href="`tel:${contact.phoneone}`"> {{ contact.phoneone }} </a>
+        <div style="border-top: 1px solid white">
+          {{ contact.persontwo }}
+          <br />
+          <a :href="`mailto:${contact.emailtwo}`"> {{ contact.emailtwo }}</a>
+          <br />
+          <a :href="`tel:${contact.phonetwo}`"> {{ contact.phonetwo }} </a>
+        </div>
       </div>
     </div>
-    <br />
-    <button
-      class="custom"
-      @click="crbt2(selecarti.id)"
-      style="width: 300px; margin: 0"
-    >
-      {{ selecarti.city }}
-    </button>
-    <button
-      class="custom"
-      @click="crbt3(selecarti2.id)"
-      style="width: 300px; margin: 0"
-      @mouseover="upHere = true"
-      @mouseleave="upHere = false"
-    >
-      {{ selecarti2.street }}
-      <img :src="selecarti2.image" alt="" v-show="upHere" />
-    </button>
-
-    <button class="custom" style="width: 300px; margin: 0">
-      {{ selecarti3.personone }}
-      <br />
-      <a :href="`mailto:${selecarti3.emailone}`">{{ selecarti3.emailone }}</a>
-      <br />
-      {{ selecarti3.phoneone }}
-    </button>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "contactsFeed",
   data() {
     return {
       contacts: [],
-      selecarti: {},
-      selecarti2: {},
-      selecarti3: {},
+      filteredContacts: [],
+      filteredCity: [],
+      filteredStreet: [],
       upHere: false,
     };
   },
   mounted() {
     this.load();
+  },
+  computed: {
+    uniqueContacts() {
+      return this.contacts.filter((contact, index) => {
+        return (
+          this.contacts.findIndex(
+            (i) => i.assignment === contact.assignment
+          ) === index
+        );
+      });
+    },
   },
   methods: {
     async load() {
@@ -65,17 +92,89 @@ export default {
         this.contacts = response.data.contacts;
       }
     },
-    async crbt(id) {
-      this.selecarti = this.contacts.find((contact) => contact.id == id);
+    filterByAssignment(assignment) {
+      this.resetFilters1();
+      this.filteredContacts = this.contacts.filter(
+        (contact) => contact.assignment === assignment
+      );
     },
-    async crbt2(id) {
-      this.selecarti2 = this.contacts.find((contact) => contact.id == id);
+    filterByCity(city) {
+      this.resetFilters2();
+      this.filteredCity = this.contacts.filter(
+        (contact) => contact.city === city
+      );
     },
-    async crbt3(id) {
-      this.selecarti3 = this.contacts.find((contact) => contact.id == id);
+    filterByStreet(street) {
+      this.filteredStreet = this.contacts.filter(
+        (contact) => contact.street === street
+      );
+    },
+    resetFilters1() {
+      this.filteredCity = [];
+      this.filteredStreet = [];
+    },
+    resetFilters2() {
+      this.filteredStreet = [];
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  display: grid;
+  grid-template-columns: 300px 300px 300px 300px;
+  grid-template-rows: 100px 500px;
+  gap: 5px 10px;
+  grid-template-areas:
+    "one two three four"
+    "assignment city street contact";
+}
+h1 {
+  font-weight: 500;
+  font-size: 24px;
+  background: lightgray;
+  text-align: center;
+}
+.one {
+  grid-area: one;
+}
+.two {
+  grid-area: two;
+}
+.three {
+  grid-area: three;
+}
+.four {
+  grid-area: four;
+}
+.grid-style {
+  color: white;
+  font-size: 22px;
+}
+.assignment {
+  grid-area: assignment;
+  background: #1b3d8f;
+}
+.city {
+  grid-area: city;
+  background: #f59c00;
+  color: white;
+}
+.street {
+  grid-area: street;
+  background: #1b3d8f;
+}
+.contact {
+  grid-area: contact;
+  background: #f59c00;
+}
+button {
+  display: block;
+  text-align: left;
+  margin: 10px;
+}
+button:hover {
+  background-color: grey;
+}
+</style>
