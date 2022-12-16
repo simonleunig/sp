@@ -1,4 +1,7 @@
 <template>
+<div>
+    <input type="text" v-model="searchInput" placeholder="Search..." @keyup="search()" />
+    </div>
   <div class="container">
     <h1 class="one">Zuordnung</h1>
     <div class="assignment grid-style">
@@ -116,6 +119,18 @@ export default {
     resetFilters2() {
       this.filteredStreet = [];
     },
+    search() {      
+      this.filteredContacts = this.contacts.filter((contact) => contact.assignment.includes(this.searchInput));
+      this.filteredCity = this.contacts.filter((contact) => contact.city.includes(this.searchInput));
+      this.filteredStreet = this.contacts.filter((contact) => contact.street.includes(this.searchInput) || 
+      contact.personone.includes(this.searchInput) || 
+      contact.emailone.includes(this.searchInput) || 
+      contact.phoneone.includes(this.searchInput) || 
+      contact.persontwo.includes(this.searchInput) || 
+      contact.emailtwo.includes(this.searchInput) || 
+      contact.phonetwo.includes(this.searchInput)
+      );
+    },
   },
 };
 </script>
@@ -123,7 +138,7 @@ export default {
 <style scoped>
 .container {
   display: grid;
-  grid-template-columns: 300px 300px 300px 300px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 100px 500px;
   gap: 5px 10px;
   grid-template-areas:
@@ -158,7 +173,7 @@ h1 {
 }
 .city {
   grid-area: city;
-  background: #f59c00;
+  background: #1b3d8f;
   color: white;
 }
 .street {
@@ -167,7 +182,7 @@ h1 {
 }
 .contact {
   grid-area: contact;
-  background: #f59c00;
+  background: #1b3d8f;
 }
 button {
   display: block;

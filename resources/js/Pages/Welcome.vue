@@ -3,7 +3,7 @@
     <Head title="Die Mürwiker" />
     <div class="wrapper">
       <div class="header">
-        <h1>Die Mürwiker</h1>
+        <img :src="'https://www.muerwiker.de/typo3conf/ext/h2template/Resources/Public/Images/logomuerr.png'" style="height: 100px"/>
         <p>{{ time }}</p>
       </div>    
       <div> <ContactsFeed/> </div>
