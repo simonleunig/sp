@@ -1,26 +1,31 @@
 <template>
-<div>
-    <input type="text" v-model="searchInput" placeholder="Search..." @keyup="search()" />
-    </div>
+  <div>
+    <input
+      type="text"
+      v-model="searchInput"
+      placeholder="Suchen..."
+      @keyup="search()"
+    />
+  </div>
   <div class="container">
     <h1 class="one">Zuordnung</h1>
     <div class="assignment grid-style">
       <button
-        v-for="(contact, index) in uniqueContacts"
+        v-for="(assignment, index) in uniqueAssignments"
         :key="index"
-        @click="filterByAssignment(contact.assignment)"
+        @click="filterByAssignment(assignment)"
       >
-        {{ contact.assignment }}
+        {{ assignment }}
       </button>
     </div>
     <h1 class="two">Ort</h1>
     <div class="city grid-style">
       <button
-        v-for="(contact, index) in filteredContacts"
+        v-for="(city, index) in uniqueCities"
         :key="index"
-        @click="filterByCity(contact.city)"
+        @click="filterByCity(city)"
       >
-        {{ contact.city }}
+        {{ city }}
       </button>
     </div>
     <h1 class="three">Straße</h1>
@@ -68,6 +73,7 @@ export default {
   data() {
     return {
       contacts: [],
+      searchInput: "",
       filteredContacts: [],
       filteredCity: [],
       filteredStreet: [],
@@ -78,14 +84,19 @@ export default {
     this.load();
   },
   computed: {
-    uniqueContacts() {
-      return this.contacts.filter((contact, index) => {
-        return (
-          this.contacts.findIndex(
-            (i) => i.assignment === contact.assignment
-          ) === index
+    uniqueAssignments() {
+      return this.contacts
+        .map((contact) => contact.assignment)
+        .filter(
+          (assignment, index, self) => self.indexOf(assignment) === index
         );
-      });
+    },
+    uniqueCities() {
+      return this.filteredContacts
+        .map((contact) => contact.city)
+        .filter(
+          (city, index, self) => self.indexOf(city) === index
+        );
     },
   },
   methods: {
@@ -103,33 +114,66 @@ export default {
     },
     filterByCity(city) {
       this.resetFilters2();
-      this.filteredCity = this.contacts.filter(
+      this.filteredCity = this.filteredContacts.filter(
         (contact) => contact.city === city
       );
     },
     filterByStreet(street) {
-      this.filteredStreet = this.contacts.filter(
+      this.resetFilters3();
+      this.filteredStreet = this.filteredCity.filter(
         (contact) => contact.street === street
       );
     },
     resetFilters1() {
+      this.filteredContacts = [];
       this.filteredCity = [];
       this.filteredStreet = [];
     },
     resetFilters2() {
+      this.filteredCity = [];
       this.filteredStreet = [];
     },
-    search() {      
-      this.filteredContacts = this.contacts.filter((contact) => contact.assignment.includes(this.searchInput));
-      this.filteredCity = this.contacts.filter((contact) => contact.city.includes(this.searchInput));
-      this.filteredStreet = this.contacts.filter((contact) => contact.street.includes(this.searchInput) || 
-      contact.personone.includes(this.searchInput) || 
-      contact.emailone.includes(this.searchInput) || 
-      contact.phoneone.includes(this.searchInput) || 
-      contact.persontwo.includes(this.searchInput) || 
-      contact.emailtwo.includes(this.searchInput) || 
-      contact.phonetwo.includes(this.searchInput)
-      );
+    resetFilters3() {
+      this.filteredStreet = [];
+    },
+    search() {
+      if (this.searchInput === "") {
+        // Reset the search input and filtered lists
+        this.searchInput = "";
+        this.filteredContacts = [];
+        this.filteredCity = [];
+        this.filteredStreet = [];
+      } else {
+        // Filter the contacts based on the search input
+        this.filteredContacts = this.filterList(this.contacts);
+        this.filteredCity = this.filterList(this.filteredContacts);
+        this.filteredStreet = this.filterList(this.filteredCity);
+      }
+    },
+    filterList(list) {
+      return list.filter((contact) => {
+        return (
+          contact.assignment
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          contact.city.toLowerCase().includes(this.searchInput.toLowerCase()) ||
+          contact.street
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          contact.personone
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          contact.phoneone
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          contact.phonetwo
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          contact.persontwo
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase())
+        );
+      });
     },
   },
 };
