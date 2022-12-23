@@ -60,3 +60,15 @@ Um in die Administration zu gelangen kann einer der folgenden Links ausgewählt 
 - /login für Login
 - /admin für das Admin Dashboard
 
+## Testing 
+
+Zum Durchlaufen der automatisierten Tests muss die Webseite und die Datenbank laufen.
+```
+- php artisan serve
+- npm run dev
+```
+
+Anschließend können die Tests mit folgendem Befehl ausgeführt werden:
+```
+- php artisan test
+```
