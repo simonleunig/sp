@@ -31,8 +31,9 @@
   </div>
   <!-- The following div is used to show all the data. Each button has a @click function to show the next item -->
   <div class="container">
-    <h1 class="one">Zuordnung
-      <img src="/images/select-area-icon.png" alt="" style="height: 50%; width: 15%;display: block; margin: auto">
+    <h1 class="one">
+      Zuordnung
+      <img src="/images/select-area-icon.png" alt="" class="icons-header" />
     </h1>
     <div class="assignment grid-style">
       <button
@@ -43,8 +44,13 @@
         {{ assignment }}
       </button>
     </div>
-    <h1 class="two">Ort
-      <img src="/images/search-map-location-icon.png" alt="" style="height: 50%; width: 15%;display: block; margin: auto">
+    <h1 class="two">
+      Ort
+      <img
+        src="/images/search-map-location-icon.png"
+        alt=""
+        class="icons-header"
+      />
     </h1>
     <div class="city grid-style">
       <button
@@ -55,8 +61,13 @@
         {{ city }}
       </button>
     </div>
-    <h1 class="three">Straße
-      <img src="/images/direction-road-sign-icon.png" alt="" style="height: 50%; width: 15%;display: block; margin: auto">
+    <h1 class="three">
+      Straße
+      <img
+        src="/images/direction-road-sign-icon.png"
+        alt=""
+        class="icons-header"
+      />
     </h1>
     <div class="street grid-style">
       <button
@@ -81,8 +92,13 @@
         />
       </button>
     </div>
-    <h1 class="four">Kontakt
-      <img src="/images/contact-book-line-icon.png" alt="" style="height: 50%; width: 15%;display: block; margin: auto">
+    <h1 class="four">
+      Kontakt
+      <img
+        src="/images/contact-book-line-icon.png"
+        alt=""
+        class="icons-header"
+      />
     </h1>
     <div class="contact grid-style">
       <div
@@ -92,28 +108,44 @@
       >
         {{ contact.personone }}
         <br />
-        <a :href="`mailto:${contact.emailone}`"> {{ contact.emailone }}
-        <img src="/images/email-icon.png" alt="" style="height: 7%; width: 7%; display: inline-block">
+        <a :href="`mailto:${contact.emailone}`">
+          {{ contact.emailone }}
+          <img src="/images/email-icon.png" alt="" class="icons-contacts" />
         </a>
         <br />
-        <a :href="`tel:${contact.phoneone}`"> {{ contact.phoneone }}
-        <img src="/images/phone-outline-icon.png" alt="" style="height: 7%; width: 7%; display: inline-block">
+        <a :href="`tel:${contact.phoneone}`">
+          {{ contact.phoneone }}
+          <img
+            src="/images/phone-outline-icon.png"
+            alt=""
+            class="icons-contacts"
+          />
         </a>
         <div style="border-top: 4px solid white">
           {{ contact.persontwo }}
           <br />
-          <a :href="`mailto:${contact.emailtwo}`"> {{ contact.emailtwo }}
-          <img src="/images/email-icon.png" alt="" style="height: 7%; width: 7%; display: inline-block">
+          <a :href="`mailto:${contact.emailtwo}`">
+            {{ contact.emailtwo }}
+            <img src="/images/email-icon.png" alt="" class="icons-contacts" />
           </a>
           <br />
-          <a :href="`tel:${contact.phonetwo}`"> {{ contact.phonetwo }}
-          <img src="/images/phone-outline-icon.png" alt="" style="height: 7%; width: 7%; display: inline-block">
-        </a>
+          <a :href="`tel:${contact.phonetwo}`">
+            {{ contact.phonetwo }}
+            <img
+              src="/images/phone-outline-icon.png"
+              alt=""
+              class="icons-contacts"
+            />
+          </a>
         </div>
         <div style="border: 1px solid yellow">
           <a :href="`tel:${contact.emergency}`">
-            Notfallnummer: {{ contact.emergency }}            
-            <img src="/images/phone-outline-icon.png" alt="" style="height: 7%; width: 7%; display: inline-block">
+            Notfallnummer: {{ contact.emergency }}
+            <img
+              src="/images/phone-outline-icon.png"
+              alt=""
+              class="icons-contacts"
+            />
           </a>
         </div>
       </div>
@@ -299,5 +331,17 @@ button:hover {
   background-color: grey;
 }
 .grid-image {
+
+}
+.icons-contacts {
+  height: 7%;
+  width: 7%;
+  display: inline-block;
+}
+.icons-header {
+  height: 50%;
+  width: 15%;
+  display: block;
+  margin: auto;
 }
 </style>
