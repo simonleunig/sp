@@ -17,15 +17,6 @@ class CallcenterController extends Controller
     ], 200);
   }
 
-  public function group_all_contacts()
-  {
-    $contacts = Callcenter::groupBy('city', true)->get();
-
-    return response()->json([
-      'contacts' => $contacts
-    ], 200);
-  }
-
   public function create_contact(Request $request)
   {
     $this->validate($request, [

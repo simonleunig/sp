@@ -24,5 +24,4 @@ Route::controller(CallcenterController::class)->group(function () {
     Route::post('/create_contact', 'create_contact');
     Route::post('/delete_contact', 'delete_contact');
     Route::post('/update_contact', 'update_contact');
-    Route::get('/group_all_contacts', 'group_all_contacts');
 });

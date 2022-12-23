@@ -1,3 +1,4 @@
+<!-- This file is used on the starting screen to display all items -->
 <template>
   <div>
     <input
@@ -28,6 +29,7 @@
       </div>
     </modal>
   </div>
+  <!-- The following div is used to show all the data. Each button has a @click function to show the next item -->
   <div class="container">
     <h1 class="one">Zuordnung</h1>
     <div class="assignment grid-style">
@@ -122,6 +124,7 @@ export default {
   mounted() {
     this.load();
   },
+  // The two methods here are used to make sure only unique items are shown. No duplicates.
   computed: {
     uniqueAssignments() {
       return this.contacts
@@ -137,12 +140,14 @@ export default {
     },
   },
   methods: {
+    // Get the data from the api
     async load() {
       const response = await axios.get("/api/get_all_contacts");
       if (response) {
         this.contacts = response.data.contacts;
       }
     },
+    // The filterBy methods are used when clicking on a button to load the next item.
     filterByAssignment(assignment) {
       this.resetFilters1();
       this.filteredContacts = this.contacts.filter(
@@ -161,6 +166,7 @@ export default {
         (contact) => contact.street === street
       );
     },
+    // When clicking on a Button the resetFilter methods get called to show only the next corresponding item.
     resetFilters1() {
       this.filteredContacts = [];
       this.filteredCity = [];
@@ -173,6 +179,7 @@ export default {
     resetFilters3() {
       this.filteredStreet = [];
     },
+    // The Search and filterList method is used to search all items and display them using a text input.
     search() {
       if (this.searchInput === "") {
         // Reset the search input and filtered lists

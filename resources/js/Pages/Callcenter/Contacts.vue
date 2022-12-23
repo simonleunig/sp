@@ -1,3 +1,4 @@
+<!-- This file is used to create, edit and delete contacts and add them to the database -->
 <template>
   <div>
     <Head title="Datenbank" />
@@ -307,6 +308,7 @@ export default {
         this.contacts = response.data.contacts;
       }
     },
+    // This method is used to create a contact
     async createContactEntry() {
       if (
         this.contactEntry.image != "" &&
@@ -348,6 +350,7 @@ export default {
         console.log("fill");
       }
     },
+    // This method is used to update a contact
     editContact(id) {
       this.selectedContact = this.contacts.find((contact) => contact.id == id);
       this.showUpdateOverlay = true;
@@ -362,6 +365,7 @@ export default {
           });
       }
     },
+    // This method is used to delete a contact
     async deleteContact(id) {
       await axios.post("/api/delete_contact", { id }).then((response) => {
         this.load();
