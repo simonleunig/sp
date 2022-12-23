@@ -256,13 +256,22 @@ export default {
           contact.personone
             .toLowerCase()
             .includes(this.searchInput.toLowerCase()) ||
+          contact.emailone
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
           contact.phoneone
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          contact.emailtwo
             .toLowerCase()
             .includes(this.searchInput.toLowerCase()) ||
           contact.phonetwo
             .toLowerCase()
             .includes(this.searchInput.toLowerCase()) ||
           contact.persontwo
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          contact.emergency
             .toLowerCase()
             .includes(this.searchInput.toLowerCase())
         );
@@ -331,7 +340,6 @@ button:hover {
   background-color: grey;
 }
 .grid-image {
-
 }
 .icons-contacts {
   height: 7%;
