@@ -31,7 +31,9 @@
   </div>
   <!-- The following div is used to show all the data. Each button has a @click function to show the next item -->
   <div class="container">
-    <h1 class="one">Zuordnung</h1>
+    <h1 class="one">Zuordnung
+      <img src="/images/select-area-icon.png" alt="" style="height: 50%; width: 15%;display: block; margin: auto">
+    </h1>
     <div class="assignment grid-style">
       <button
         v-for="(assignment, index) in uniqueAssignments"
@@ -41,7 +43,9 @@
         {{ assignment }}
       </button>
     </div>
-    <h1 class="two">Ort</h1>
+    <h1 class="two">Ort
+      <img src="/images/search-map-location-icon.png" alt="" style="height: 50%; width: 15%;display: block; margin: auto">
+    </h1>
     <div class="city grid-style">
       <button
         v-for="(city, index) in uniqueCities"
@@ -51,7 +55,9 @@
         {{ city }}
       </button>
     </div>
-    <h1 class="three">Straße</h1>
+    <h1 class="three">Straße
+      <img src="/images/direction-road-sign-icon.png" alt="" style="height: 50%; width: 15%;display: block; margin: auto">
+    </h1>
     <div class="street grid-style">
       <button
         v-for="(contact, index) in filteredCity"
@@ -75,7 +81,9 @@
         />
       </button>
     </div>
-    <h1 class="four">Kontakt</h1>
+    <h1 class="four">Kontakt
+      <img src="/images/contact-book-line-icon.png" alt="" style="height: 50%; width: 15%;display: block; margin: auto">
+    </h1>
     <div class="contact grid-style">
       <div
         style="margin: 10px"
@@ -84,19 +92,28 @@
       >
         {{ contact.personone }}
         <br />
-        <a :href="`mailto:${contact.emailone}`"> {{ contact.emailone }}</a>
+        <a :href="`mailto:${contact.emailone}`"> {{ contact.emailone }}
+        <img src="/images/email-icon.png" alt="" style="height: 7%; width: 7%; display: inline-block">
+        </a>
         <br />
-        <a :href="`tel:${contact.phoneone}`"> {{ contact.phoneone }} </a>
+        <a :href="`tel:${contact.phoneone}`"> {{ contact.phoneone }}
+        <img src="/images/phone-outline-icon.png" alt="" style="height: 7%; width: 7%; display: inline-block">
+        </a>
         <div style="border-top: 4px solid white">
           {{ contact.persontwo }}
           <br />
-          <a :href="`mailto:${contact.emailtwo}`"> {{ contact.emailtwo }}</a>
+          <a :href="`mailto:${contact.emailtwo}`"> {{ contact.emailtwo }}
+          <img src="/images/email-icon.png" alt="" style="height: 7%; width: 7%; display: inline-block">
+          </a>
           <br />
-          <a :href="`tel:${contact.phonetwo}`"> {{ contact.phonetwo }} </a>
+          <a :href="`tel:${contact.phonetwo}`"> {{ contact.phonetwo }}
+          <img src="/images/phone-outline-icon.png" alt="" style="height: 7%; width: 7%; display: inline-block">
+        </a>
         </div>
         <div style="border: 1px solid yellow">
           <a :href="`tel:${contact.emergency}`">
-            Notfallnummer: {{ contact.emergency }}
+            Notfallnummer: {{ contact.emergency }}            
+            <img src="/images/phone-outline-icon.png" alt="" style="height: 7%; width: 7%; display: inline-block">
           </a>
         </div>
       </div>
