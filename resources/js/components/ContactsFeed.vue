@@ -6,6 +6,27 @@
       placeholder="Suchen..."
       @keyup="search()"
     />
+    <button @click="showModal = true">Hilfe</button>
+    <modal v-if="showModal" @close="showModal = false" class="overlay">
+      <div class="form">
+        <h2 style="text-decoration: underline">Hier bekommst du Hilfe!</h2>
+        Die Webseite funktioniert ganz einfach. <br />
+        - Klicke einfach unter der Tabelle Zuordnung auf eine beliebige
+        Zuordnung. <br />
+        - Danach erscheint in der Tabelle Ort, Orte die angeklickt werden
+        können. Suche hier einen aus und klicke diesen an. <br />
+        - In der Tabelle Straße sind dann alle Straßen zum zugehörigen Ort zu
+        sehen. Wenn du mit dem Cursor rüber schwebst, ist manchmal auch ein Bild
+        dabei. <br />
+        - Klicke einfach auf eine beliebige Straße. <br />
+        - Nun ist in der letzten Tabelle Kontakt ein Überblick aller Kontakte,
+        die zu den vorher ausgewählten Tabellen gehören! <br />
+        Falls keine Zuordnungen zu sehen sind, spreche mit dem Administrator.
+        <div>
+          <button @click="showModal = false" class="custom">Schließen</button>
+        </div>
+      </div>
+    </modal>
   </div>
   <div class="container">
     <h1 class="one">Zuordnung</h1>
@@ -34,11 +55,22 @@
         v-for="(contact, index) in filteredCity"
         :key="index"
         @click="filterByStreet(contact.street)"
-        @mouseover="upHere = true"
-        @mouseleave="upHere = false"
+        @mouseover="
+          upHere = true;
+          streetImages[index] = contact.image;
+        "
+        @mouseleave="
+          upHere = false;
+          streetImages = {};
+        "
       >
         {{ contact.street }}
-        <img :src="contact.image" alt="" v-show="upHere" />
+        <img
+          :src="streetImages[index]"
+          alt=""
+          v-show="upHere"
+          class="grid-image"
+        />
       </button>
     </div>
     <h1 class="four">Kontakt</h1>
@@ -53,12 +85,17 @@
         <a :href="`mailto:${contact.emailone}`"> {{ contact.emailone }}</a>
         <br />
         <a :href="`tel:${contact.phoneone}`"> {{ contact.phoneone }} </a>
-        <div style="border-top: 1px solid white">
+        <div style="border-top: 4px solid white">
           {{ contact.persontwo }}
           <br />
           <a :href="`mailto:${contact.emailtwo}`"> {{ contact.emailtwo }}</a>
           <br />
           <a :href="`tel:${contact.phonetwo}`"> {{ contact.phonetwo }} </a>
+        </div>
+        <div style="border: 1px solid yellow">
+          <a :href="`tel:${contact.emergency}`">
+            Notfallnummer: {{ contact.emergency }}
+          </a>
         </div>
       </div>
     </div>
@@ -78,6 +115,8 @@ export default {
       filteredCity: [],
       filteredStreet: [],
       upHere: false,
+      streetImages: {},
+      showModal: false,
     };
   },
   mounted() {
@@ -94,9 +133,7 @@ export default {
     uniqueCities() {
       return this.filteredContacts
         .map((contact) => contact.city)
-        .filter(
-          (city, index, self) => self.indexOf(city) === index
-        );
+        .filter((city, index, self) => self.indexOf(city) === index);
     },
   },
   methods: {
@@ -183,8 +220,9 @@ export default {
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 100px 500px;
+  grid-template-rows: 100px 100vh;
   gap: 5px 10px;
+  overflow: auto;
   grid-template-areas:
     "one two three four"
     "assignment city street contact";
@@ -235,5 +273,7 @@ button {
 }
 button:hover {
   background-color: grey;
+}
+.grid-image {
 }
 </style>

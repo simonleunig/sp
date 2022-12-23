@@ -3,7 +3,7 @@
     <Head title="Die Mürwiker" />
     <div class="wrapper">
       <div class="header">
-        <img :src="'https://www.muerwiker.de/typo3conf/ext/h2template/Resources/Public/Images/logomuerr.png'" style="height: 100px"/>
+        <img :src="'https://www.muerwiker.de/typo3conf/ext/h2template/Resources/Public/Images/logomuerr.png'" v-on:click="reloadPage" style="height: 100px; cursor: pointer"/>
         <p>{{ time }}</p>
       </div>    
       <div> <ContactsFeed/> </div>
@@ -36,6 +36,9 @@ export default {
     updateTime() {
       this.time = new Date().toLocaleString();
     },
+    reloadPage() {
+      location.reload();
+    }
   },
 };
 </script>
@@ -54,9 +57,6 @@ export default {
   color: #eee;
   font-weight: 500;
   font-size: 24px;
-}
-.header h1 {
-  margin: 0;
 }
 .header p {
   font-size: 20px;
