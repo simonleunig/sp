@@ -40,6 +40,7 @@ class CallcenterController extends Controller
 
 
     $callcenter->save();
+      return response()->json(['success' => 'Callcenter created successfully.']);
   }
 
   public function delete_contact(Request $request)
